@@ -3,8 +3,8 @@ import Prompt from "../../../../models/prompt";
 
 
 //THIS IS A ROUTE PAGE AND TAKE OR GET PROMPT (means data as prompt and tag ) FROM USER
-export const POST = async (req) => {
-  const { userId, prompt, tag } = await req.json();
+export const POST = async (request) => {
+  const { userId, prompt, tag } = await request.json();
 
   try {
     //this is a 'LAMBDA FUNCTION' means it connectoDb then work then close every time automatically
