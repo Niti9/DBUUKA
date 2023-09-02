@@ -1,4 +1,5 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
+
 import GoogleProvider from "next-auth/providers/google";
 // import { connectToDB } from "../utils/database";
 import User from "../../../../models/user";
@@ -29,7 +30,7 @@ const handler = NextAuth({
     },
 
     //signIn function
-    async signIn({ profile }) {
+    async signIn({ account, profile, user, credentials }) {
       try {
         //  Here we have functionality
         //of  serverless route , which means
@@ -51,7 +52,7 @@ const handler = NextAuth({
             //it means below space change with no space
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
-            password: profile.password,
+            // password: profile.password,
           });
         }
         return true;
