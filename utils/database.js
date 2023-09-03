@@ -13,7 +13,6 @@ export const connectToDB = async () => {
   //else condition
   try {
     await mongoose.connect(
-      // "mongodb+srv://Nit:N.I.T.I.N@cluster0.0shci4t.mongodb.net/?retryWrites=true&w=majority",
       process.env.MONGODB_URI,{
         dbName: "share_prompt",
         useNewUrlParser: true,
