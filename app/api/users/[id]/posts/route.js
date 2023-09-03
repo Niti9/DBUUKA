@@ -8,9 +8,9 @@ export const GET = async (request,{params}) => {
     await connectToDB();
 
     // here creator means author name or user name
-    const prompts = await Prompt.find({}).populate('creator');
+    const prompts = await Prompt.find({creator:params.id }).populate('creator');
 
-    creator:params.id //
+    // 
     return new Response(JSON.stringify(prompts), {
       status: 200
     });

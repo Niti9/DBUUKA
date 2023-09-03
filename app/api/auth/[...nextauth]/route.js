@@ -22,6 +22,7 @@ const handler = NextAuth({
   callbacks: {
     //session function
     async session({ session }) {
+      //store the user id from MongoDB to session
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
@@ -45,14 +46,23 @@ const handler = NextAuth({
           email: profile.email,
         });
 
-        //if not, create a new user in  database
-        if (!userExists) {
+        // //if not, create a new user in  database
+        // if (!userExists) {
+        //   await User.create({
+        //     email: profile.email,
+        //     //it means below space change with no space
+        //     username: profile.name.replace(" ", "").toLowerCase(),
+        //     image: profile.picture,
+        //     // password: profile.password,
+        //   });
+        // }
+        if (userExists===null) {
           await User.create({
-            email: profile.email,
+            email: profile?.email,
             //it means below space change with no space
-            username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture,
-            // password: profile.password,
+            username: profile?.name.replace(/\s+/g, '').toLowerCase(),
+            image: user.image
+            
           });
         }
         return true;

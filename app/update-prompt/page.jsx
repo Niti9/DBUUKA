@@ -59,7 +59,7 @@ const EditPrompt = () => {
            //we don't need user id this time
           // userId: session?.user.id,
           tag: post.tag,
-        })
+        }),
       });
 
       // console.log(response); //to check response

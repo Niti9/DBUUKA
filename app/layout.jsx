@@ -7,7 +7,7 @@ import Nav from '../components/Nav';
 import Provider from '../components/Provider';
 
 export const metadata = {
-  title: "ok",
+  title: "Dbuuka",
   description: "Discover & Share AI Prompts"
 };
 

@@ -4,19 +4,35 @@ import React from "react";
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import Nav from "./Nav";
+import { useMemo } from "react";
+// import PromptCardList from './PromptCardList';
 
-// another component for show search stored data
+// // another component for show search stored data
+
 const PromptCardList = ({ data, handleTagClick }) => {
+
+
+  // useEffect(()=>{
+  //   {data.map((post) => (
+  //     <PromptCard
+  //       key={post._id}
+  //       post={post}
+  //       handleTagClick={handleTagClick}
+  //     />
+  //   ))}
+  // },[])
   return (
+      
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
-        ></PromptCard>
+        />
       ))}
     </div>
+      // console.log(data);
   );
 };
 
@@ -28,14 +44,14 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchResults, setSearchedResults] = useState([]);
 
-  const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
-
-    setAllPosts(data);
-  };
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/prompt");
+      const data = await response.json();
+
+      setAllPosts(data);
+    };
+
     fetchPosts();
   }, []);
 
@@ -45,7 +61,7 @@ const Feed = () => {
     const regex = new RegExp(searchtext, "i");
     return allPosts.filter(
       (item) =>
-        regex.test(item.creator.username) ||
+        regex.test(item.creator?.username) ||
         regex.test(item.tag) ||
         regex.test(item.prompt)
     );
@@ -55,8 +71,6 @@ const Feed = () => {
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
-
-    console.log(searchText);
 
     setSearchTimeout(
       setTimeout(() => {
@@ -75,6 +89,12 @@ const Feed = () => {
     setSearchedResults(searchResult);
   };
 
+
+// Memoize the filtered results
+const memoizedSearchResults = useMemo(() => {
+  return searchText ? searchResults : allPosts;
+}, [searchText, searchResults, allPosts]);
+  
   return (
     <div className="feed">
       <section className="feed">
@@ -98,6 +118,8 @@ const Feed = () => {
         ) : (
           <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
         )}
+         {/* <PromptCardList data={memoizedSearchResults} handleTagClick={handleTagClick} /> */}
+      
       </section>
     </div>
   );
