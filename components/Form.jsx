@@ -49,6 +49,7 @@ const Form = ({ post, setPost, submitting, handleSubmit, type }) => {
                 tag: e.target.value,
               })
             }
+            type='text'
             placeholder="#tag"
             required
             className="form_input"

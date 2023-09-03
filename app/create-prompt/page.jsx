@@ -41,6 +41,7 @@ const CreatePrompt = () => {
       // console.log(response); //to check response
       if (response.ok) { //agar submit successfully hoga to hum home page par waapas aajayenge
         router.push("/");
+        console.log("error");
       }
     } catch (error) {
       console.log(error);

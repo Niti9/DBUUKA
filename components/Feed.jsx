@@ -10,19 +10,7 @@ import { useMemo } from "react";
 // // another component for show search stored data
 
 const PromptCardList = ({ data, handleTagClick }) => {
-
-
-  // useEffect(()=>{
-  //   {data.map((post) => (
-  //     <PromptCard
-  //       key={post._id}
-  //       post={post}
-  //       handleTagClick={handleTagClick}
-  //     />
-  //   ))}
-  // },[])
   return (
-      
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
@@ -32,7 +20,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
         />
       ))}
     </div>
-      // console.log(data);
+    // console.log(data);
   );
 };
 
@@ -89,12 +77,6 @@ const Feed = () => {
     setSearchedResults(searchResult);
   };
 
-
-// Memoize the filtered results
-const memoizedSearchResults = useMemo(() => {
-  return searchText ? searchResults : allPosts;
-}, [searchText, searchResults, allPosts]);
-  
   return (
     <div className="feed">
       <section className="feed">
@@ -118,8 +100,6 @@ const memoizedSearchResults = useMemo(() => {
         ) : (
           <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
         )}
-         {/* <PromptCardList data={memoizedSearchResults} handleTagClick={handleTagClick} /> */}
-      
       </section>
     </div>
   );

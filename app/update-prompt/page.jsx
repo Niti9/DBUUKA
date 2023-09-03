@@ -51,7 +51,7 @@ const EditPrompt = () => {
 
     // CREATE OWN API WITHOUT EXPRESS, CONTROLLER,ROUTER ETC....
     try {
-      console.log("trying");
+      console.log("patch trying");
       const response = await fetch(`/api/prompt/${promptId}`, {
         method: 'PATCH', //TO UPDATE BY PATCH REQUEST
         body: JSON.stringify({
